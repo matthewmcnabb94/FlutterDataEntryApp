@@ -18,6 +18,12 @@ String c = ',';
 String a = "'";
 String fDate, _selectedDatePicked;
 bool datePicked = false;
+var _controllerCName = TextEditingController();
+var _controllerVDetails = TextEditingController();
+var _controllerTPartNumber = TextEditingController();
+var _controllerPrice = TextEditingController();
+var _controllerPayment = TextEditingController();
+var _controllerFRequired = TextEditingController();
 
 TimeOfDay selectedTime = TimeOfDay.now();
 
@@ -35,7 +41,13 @@ class FormScreenState extends State<FormScreen> {
 
   Widget _buildName() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Customer Name'),
+      controller: _controllerCName,
+      decoration: InputDecoration(
+          labelText: 'Customer Name',
+          suffixIcon: IconButton(
+            onPressed: () => _controllerCName.clear(),
+            icon: Icon(Icons.clear),
+          )),
       maxLength: 25,
       validator: (String value) {
         if (value.isEmpty) {
@@ -63,7 +75,13 @@ class FormScreenState extends State<FormScreen> {
 
   Widget _buildVehicleDetails() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Vehilce Details'),
+      controller: _controllerVDetails,
+      decoration: InputDecoration(
+          labelText: 'Vehicle Details',
+          suffixIcon: IconButton(
+            onPressed: () => _controllerVDetails.clear(),
+            icon: Icon(Icons.clear),
+          )),
       keyboardType: TextInputType.visiblePassword,
       validator: (String value) {
         if (value.isEmpty) {
@@ -80,7 +98,13 @@ class FormScreenState extends State<FormScreen> {
 
   Widget _builTurboModel() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Turbo Part Number'),
+      controller: _controllerTPartNumber,
+      decoration: InputDecoration(
+          labelText: 'Turbo Part Number',
+          suffixIcon: IconButton(
+            onPressed: () => _controllerTPartNumber.clear(),
+            icon: Icon(Icons.clear),
+          )),
       keyboardType: TextInputType.url,
       validator: (String value) {
         if (value.isEmpty) {
@@ -97,7 +121,13 @@ class FormScreenState extends State<FormScreen> {
 
   Widget _buildPrice() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Price'),
+      controller: _controllerPrice,
+      decoration: InputDecoration(
+          labelText: 'Price',
+          suffixIcon: IconButton(
+            onPressed: () => _controllerPrice.clear(),
+            icon: Icon(Icons.clear),
+          )),
       keyboardType: TextInputType.phone,
       validator: (String value) {
         if (value.isEmpty) {
@@ -114,7 +144,13 @@ class FormScreenState extends State<FormScreen> {
 
   Widget _buildPayment() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Payment'),
+      controller: _controllerPayment,
+      decoration: InputDecoration(
+          labelText: 'Payment',
+          suffixIcon: IconButton(
+            onPressed: () => _controllerPayment.clear(),
+            icon: Icon(Icons.clear),
+          )),
       keyboardType: TextInputType.number,
       validator: (String value) {
         //int calories = int.tryParse(value);
@@ -137,7 +173,13 @@ class FormScreenState extends State<FormScreen> {
 
   Widget _buildFittingRequired() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Fitting Required'),
+      controller: _controllerFRequired,
+      decoration: InputDecoration(
+          labelText: 'Fitting Required',
+          suffixIcon: IconButton(
+            onPressed: () => _controllerFRequired.clear(),
+            icon: Icon(Icons.clear),
+          )),
       validator: (String value) {
         if (value.isEmpty) {
           return 'Fitting required needed';
@@ -169,7 +211,7 @@ class FormScreenState extends State<FormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Form Demo")),
+      appBar: AppBar(title: Text("Car App")),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(24),
@@ -231,6 +273,12 @@ checkIfSuccess(BuildContext context) async {
   var value = await sendData();
 
   if (value == true) {
+    _controllerCName.clear();
+    _controllerVDetails.clear();
+    _controllerTPartNumber.clear();
+    _controllerPrice.clear();
+    _controllerPayment.clear();
+    _controllerFRequired.clear();
     showSimpleFlushbarSuccess(context);
   } else {
     showSimpleFlushbarError(context);
