@@ -151,7 +151,7 @@ class FormScreenState extends State<FormScreen> {
             onPressed: () => _controllerPayment.clear(),
             icon: Icon(Icons.clear),
           )),
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.text,
       validator: (String value) {
         //int calories = int.tryParse(value);
 
